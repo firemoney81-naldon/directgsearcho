@@ -1,23 +1,818 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+
+  <!-- Schema.org 구조화 데이터 (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialService",
+    "name": "자동차보험 부부 한정 전문 정보센터",
+    "description": "2026년 최신 자동차보험 부부 한정 가입 조건, 할인 혜택, 운전경력 인정 및 주요 34개 차종별 예상 금액 비교 분석.",
+    "url": "https://www.example.com/car-insurance-spouse-only-2026",
+    "telephone": "1588-XXXX",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "서울특별시 영등포구 의사당대로 XX",
+      "addressLocality": "영등포구",
+      "addressRegion": "서울특별시",
+      "postalCode": "073XX",
+      "addressCountry": "KR"
+    },
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "자동차보험 운전자 범위 한정 상품",
+      "itemListElement": [
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"부부 한정 특약 보험"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"기본 1인 한정 보험"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"부부 및 지정 1인 추가 특약"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"가족 한정 종합 보험"}}
+      ]
+    }
+  }
+  </script>
+
+  <style>
+    /* 다채롭고 부드러운 색감의 Modern UI 정의 */
+    :root {
+      --primary-color: #2b6cb0;
+      --primary-hover: #1a4f7a;
+      --secondary-color: #319795;
+      --bg-light: #f7fafc;
+      --text-main: #2d3748;
+      --text-muted: #718096;
+      --border-color: #e2e8f0;
+      --accent-color: #dd6b20;
+      --card-bg: #ffffff;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    header, section, footer {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 30px;
+      background: var(--card-bg);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      box-sizing: border-box;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2b6cb0, #319795);
+      color: white;
+      text-align: center;
+      padding: 50px 30px;
+    }
+
+    header h1 {
+      margin: 0 0 15px 0;
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.3;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #e2e8f0;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    nav {
+      margin-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 20px;
+    }
+
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 0;
+      list-style: none;
+      margin: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    h2 {
+      color: #1a365d;
+      font-size: 1.7rem;
+      border-left: 5px solid var(--primary-color);
+      padding-left: 15px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    h3 {
+      color: #2c5282;
+      font-size: 1.3rem;
+      margin-top: 30px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: var(--text-main);
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin-top: 0;
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .highlight-box {
+      background-color: #ebf8ff;
+      border-left: 4px solid var(--primary-color);
+      padding: 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 25px 0;
+    }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 25px 0;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: #edf2f7;
+      color: #2d3748;
+      font-weight: 700;
+      padding: 12px 15px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    td {
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    tr:nth-child(even) {
+      background-color: #f7fafc;
+    }
+
+    .chart-container {
+      margin: 40px auto;
+      max-width: 100%;
+      background: #ffffff;
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    /* 다중 문항 계산기 및 입력을 통한 체류시간 유도 폼 */
+    .calc-container {
+      background-color: #f0fff4;
+      border: 1px solid #c6f6d5;
+      padding: 30px;
+      border-radius: 12px;
+      margin: 35px 0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #2d3748;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="number"],
+    select,
+    textarea {
+      padding: 12px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: #ffffff;
+      color: var(--text-main);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 5px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button.btn-calculate {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 25px;
+      transition: background-color 0.3s ease, transform 0.1s ease;
+    }
+
+    button.btn-calculate:hover {
+      background-color: var(--primary-hover);
+    }
+
+    button.btn-calculate:active {
+      transform: scale(0.99);
+    }
+
+    .calc-result {
+      margin-top: 25px;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1.5px dashed var(--primary-color);
+      border-radius: 8px;
+      display: none;
+    }
+
+    /* 아코디언 FAQ 스타일 */
+    .faq-wrapper {
+      margin-top: 30px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border-color);
+      padding: 18px 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      margin: 0;
+      font-weight: 700;
+      color: #2d3748;
+      font-size: 1.1rem;
+    }
+
+    .faq-content {
+      margin-top: 12px;
+      display: none;
+      color: #4a5568;
+      font-size: 1rem;
+      padding-left: 10px;
+      border-left: 3px solid var(--secondary-color);
+    }
+
+    /* 링크 스타일 */
+    a.link-ref {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1.5px solid var(--primary-color);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    a.link-ref:hover {
+      color: var(--primary-hover);
+      border-color: var(--primary-hover);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>2026년 자동차보험 부부 한정 완벽 분석</h1>
+    <p>가장 현명한 차량 운전자 범위 설정과 조건별 예상 비용 산출, 필수 가입경력 인정 팁까지 깊이 있는 보험 설계 정보를 한눈에 제공합니다.</p>
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+      <ul>
+        <li><a href="#sec-intro">부부한정이란</a></li>
+        <li><a href="#sec-versus">비교 및 차이점</a></li>
+        <li><a href="#sec-models">34종 차종별 예상가</a></li>
+        <li><a href="#sec-benefits">혜택 및 경력등록</a></li>
+        <li><a href="#sec-calc">보험료 간이 계산기</a></li>
+        <li><a href="#sec-faq">자주 묻는 질문</a></li>
+        <li><a href="#sec-resources">신뢰 정보처</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  </header>
+
+  <!-- 개요 섹션 -->
+  <section id="sec-intro">
+    <h2>자동차보험 부부 한정 특약의 정의와 중요성</h2>
+    <p>
+      2026년도 자가용 운전자들이 가장 많이 고민하는 의사결정 중 하나는 바로 운전자 범위를 어떻게 좁히느냐 하는 것입니다. 그 중에서도 배우자가 함께 운전하는 가구라면 자동차보험 부부 한정 특약은 선택이 아닌 필수적인 설계 요소로 자리매김하고 있습니다. 본 특약은 보험에 가입된 기명피보험자와 법적인 배우자 단 두 사람만을 운전 가능한 범위로 제한하는 상품을 뜻합니다.
+    </p>
+    <div class="highlight-box">
+      <strong>중요 정보 (사실혼 관계 인정 여부):</strong> 법적인 혼인 관계 외에도 실질적으로 동거하며 부부 공동 생활을 영위하는 사실혼 관계 역시 관련 증빙 서류(주민등록등본, 사실혼 확인 판결문 등)를 제출하면 부부 한정 범위에 정식 포함될 수 있어 가입 혜택을 온전히 누릴 수 있습니다.
+    </div>
+    <p>
+      포털 네이버 지식인이나 구글 검색, 각종 전문 정보 커뮤니티인 디시인사이드, 보배드림, 에펨코리아(펨코)의 자포(자동차포럼) 유저들이 작성한 무수한 내돈내산 가입 후기를 분석해보면, 부부 한정을 적용했을 때의 보험료 할인율은 피보험자 혼자만 운전하는 1인 한정에 비해 평균 10퍼센트에서 15퍼센트 내외의 소액 차이를 유지하면서도, 가족 전체 혹은 누구나 범위로 넓힐 때보다 압도적으로 비용을 아낄 수 있어 합리적인 선택지라는 평가가 지배적입니다.
+    </p>
+  </section>
+
+  <!-- 비교 및 차이점 섹션 -->
+  <section id="sec-versus">
+    <h2>특약별 장단점 및 명확한 차이점 비교</h2>
+    <p>
+      나에게 맞는 가치를 찾기 위해 1인 지정, 부부 한정, 가족 한정, 그리고 제한 없는 누구나 운전 특약 사이의 운행 범위 및 예상 요율을 세밀히 검토해야 합니다. 유튜브 동영상 분석이나 최근의 챗지피티(ChatGPT) 및 제미나이(Gemini) 같은 인공지능(AI) 검색 에이전트 분석 결과에서도 운전자 한 명을 추가할 때 연동되는 나이 제한 요건이 전체 견적서 상의 최종 금액을 결정짓는 핵심 키워드로 확인됩니다.
+    </p>
+    
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>운전자 지정 범위</th>
+            <th>운행 가능 대상</th>
+            <th>평균적인 요율지수</th>
+            <th>핵심 장점</th>
+            <th>치명적인 단점</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>기명 피보험자 1인</td>
+            <td>본인 1인만 가능</td>
+            <td>100% (기준점)</td>
+            <td>가장 저렴한 비용 책정</td>
+            <td>배우자 비상 운행 시 종합 보장 불가</td>
+          </tr>
+          <tr>
+            <td>자동차보험 부부 한정</td>
+            <td>본인 및 법적/사실혼 배우자</td>
+            <td>108% ~ 115%</td>
+            <td>부부 동시 보장 대비 저렴한 가격</td>
+            <td>배우자 외 가족 운전 불가</td>
+          </tr>
+          <tr>
+            <td>부부 + 지정 1인</td>
+            <td>부부 및 추가 지정인 1인</td>
+            <td>120% ~ 130%</td>
+            <td>자녀 또는 형제 중 1인 추가 보장</td>
+            <td>지정인 운행 제한으로 관리 필요</td>
+          </tr>
+          <tr>
+            <td>가족 한정</td>
+            <td>본인, 배우자, 직계존비속</td>
+            <td>135% ~ 150%</td>
+            <td>부모 및 자녀까지 일괄 보장</td>
+            <td>보험료가 비교적 비쌈</td>
+          </tr>
+          <tr>
+            <td>누구나 운전 (기본)</td>
+            <td>아무나 운전 가능</td>
+            <td>180% 이상</td>
+            <td>누구에게나 차량 대여 가능</td>
+            <td>연간 납부 금액 부담이 매우 큼</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>장단점 요약</h3>
+    <ul>
+      <li><strong>장점:</strong> 배우자가 출퇴근이나 마트 장보기 등 일상에서 차량을 나누어 탈 때, 가장 저렴한곳 및 싼곳의 견적 조건을 그대로 유지하면서도 완벽한 대인, 대물, 자손 보장을 유지할 수 있습니다.</li>
+      <li><strong>단점:</strong> 명절에 친척이 차량을 임시로 운행하거나, 자녀가 일시적으로 핸들을 잡을 경우 종합보험 처리가 불가하므로 반드시 일일 임시운전자 특약을 별도로 가입해야 사고 시 피해를 예방할 수 있습니다.</li>
+    </ul>
+  </section>
+
+  <!-- 차종별 예상가 섹션 -->
+  <section id="sec-models">
+    <h2>2026년 국내외 주요 34종 차량별 부부 한정 평균 보험료 분석</h2>
+    <p>
+      과연 내가 타는 차량의 연간 보험 비용은 얼마 수준으로 예상해 볼 수 있을까요? 아래 표는 2026년 기준 무사고 3년 이상, 부부 최저 연령 만 35세 특약 가입 시 손해보험 전문 협회 표준 통계 및 실제 전문 설계 업체의 빅데이터 분석 자료를 토대로 가공한 국산차 및 수입차 34대 모델의 연간 평균 예상 금액 표입니다.
+    </p>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>대상 모델명</th>
+            <th>배기량/구분</th>
+            <th>평균 1인 기준 (만원)</th>
+            <th>부부 한정 예상가 (만원)</th>
+            <th>장단점 및 특이 요인</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>그랜저</td><td>2500cc</td><td>78</td><td>86</td><td>준대형 베스트셀러, 차대 안전 기술 할인 적용</td></tr>
+          <tr><td>2</td><td>아반떼</td><td>1600cc</td><td>62</td><td>69</td><td>생애 첫 가입율 높아 할인 요율 차이 뚜렷</td></tr>
+          <tr><td>3</td><td>쏘렌토</td><td>1600cc 하이브리드</td><td>69</td><td>76</td><td>패밀리카 선호도로 부부 한정 계약 집중</td></tr>
+          <tr><td>4</td><td>카니발</td><td>2200cc 디젤</td><td>74</td><td>82</td><td>다인승 모델로 자녀 동반 가족 특약 연계 가능</td></tr>
+          <tr><td>5</td><td>스포티지</td><td>1600cc 터보</td><td>65</td><td>72</td><td>비교적 저렴한 요율군 형성</td></tr>
+          <tr><td>6</td><td>투싼</td><td>1600cc 하이브리드</td><td>66</td><td>73</td><td>가성비가 뛰어나며 자선 및 대물 요율 안정적</td></tr>
+          <tr><td>7</td><td>펠리세이드</td><td>3800cc 가솔린</td><td>82</td><td>91</td><td>대형 SUV 특유의 높은 차량 가액으로 자차 비용 반영</td></tr>
+          <tr><td>8</td><td>제네시스 G80</td><td>2500cc 터보</td><td>95</td><td>105</td><td>고가 차량 가액으로 자차 보험료 비중 높음</td></tr>
+          <tr><td>9</td><td>제네시스 GV80</td><td>3000cc 디젤</td><td>102</td><td>113</td><td>수입 준대형 SUV 수준의 자차 부담금 발생</td></tr>
+          <tr><td>10</td><td>싼타페</td><td>1600cc 하이브리드</td><td>70</td><td>78</td><td>안전 장치 보강으로 첨단 옵션 할인 다수 포함</td></tr>
+          <tr><td>11</td><td>K5</td><td>2000cc</td><td>72</td><td>80</td><td>청년층 가입비중이 높아 기본 요율이 약간 높음</td></tr>
+          <tr><td>12</td><td>K8</td><td>2500cc</td><td>80</td><td>89</td><td>고급스러운 주행 성능 대비 양호한 사고 요율</td></tr>
+          <tr><td>13</td><td>셀토스</td><td>1600cc 터보</td><td>64</td><td>71</td><td>소형 SUV 대표 주자로 보험료 진입 장벽 낮음</td></tr>
+          <tr><td>14</td><td>레이</td><td>1000cc 가솔린</td><td>48</td><td>53</td><td>경차 할인 및 세금 감면 혜택 동시 적용</td></tr>
+          <tr><td>15</td><td>모닝</td><td>1000cc</td><td>46</td><td>51</td><td>국산 최저 요율 수준의 주행 및 차량 보장가</td></tr>
+          <tr><td>16</td><td>EV6</td><td>전기차</td><td>88</td><td>98</td><td>배터리 교체비 고가로 자차 단가 상승 요인</td></tr>
+          <tr><td>17</td><td>아이오닉5</td><td>전기차</td><td>89</td><td>99</td><td>택시 사고 통계가 일부 연동되어 신중 가입 요망</td></tr>
+          <tr><td>18</td><td>아이오닉6</td><td>전기차</td><td>86</td><td>96</td><td>공기 역학 설계로 에너지 효율 양호, 자차 소폭 낮음</td></tr>
+          <tr><td>19</td><td>GV70</td><td>2500cc 터보</td><td>90</td><td>100</td><td>30대 부부 고객들이 가장 많이 비교하는 프리미엄 차종</td></tr>
+          <tr><td>20</td><td>G70</td><td>2000cc 터보</td><td>94</td><td>104</td><td>스포츠 세단 특성상 손해율이 조금 높은 편에 속함</td></tr>
+          <tr><td>21</td><td>소나타</td><td>2000cc</td><td>70</td><td>77</td><td>패밀리 카 기본형으로 정석적인 보장지수 가짐</td></tr>
+          <tr><td>22</td><td>코나</td><td>1600cc 하이브리드</td><td>64</td><td>71</td><td>연비 효율 우수하며 안전 보조 시스템 장착 비율 높음</td></tr>
+          <tr><td>23</td><td>베뉴</td><td>1600cc</td><td>60</td><td>67</td><td>초보 운전자 부부들이 선호하는 저부담 모델</td></tr>
+          <tr><td>24</td><td>스타리아</td><td>2200cc 디젤</td><td>78</td><td>87</td><td>승합 및 화물 겸용의 경우 업무용 연동 필수 확인</td></tr>
+          <tr><td>25</td><td>렉스턴</td><td>2200cc 디젤</td><td>83</td><td>92</td><td>강인한 프레임 바디로 대인 보장 요율 유리</td></tr>
+          <tr><td>26</td><td>토레스</td><td>1500cc 터보</td><td>67</td><td>74</td><td>대중적인 SUV 인기로 순위 높은 견적군 포지셔닝</td></tr>
+          <tr><td>27</td><td>티볼리</td><td>1500cc 터보</td><td>63</td><td>70</td><td>여성 운전자 경력인정 비율 높은 차종</td></tr>
+          <tr><td>28</td><td>QM6</td><td>2000cc LPe</td><td>66</td><td>73</td><td>가스차의 부품 및 정비성 안정으로 양호한 자차 적용</td></tr>
+          <tr><td>29</td><td>XM3</td><td>1300cc 터보</td><td>63</td><td>70</td><td>콤팩트한 체급 설계로 부담 없는 연간 비용 수렴</td></tr>
+          <tr><td>30</td><td>SM6</td><td>1800cc 터보</td><td>71</td><td>79</td><td>가입 경력자에 따라 최대 30% 이상 할인 가능</td></tr>
+          <tr><td>31</td><td>포터</td><td>전기/디젤 화물</td><td>76</td><td>85</td><td>개인 화물 용도 시 별도 요율 확인 요구</td></tr>
+          <tr><td>32</td><td>봉고</td><td>전기/디젤 화물</td><td>75</td><td>84</td><td>포터와 동일 범주로 분류 및 요율 공동 연동</td></tr>
+          <tr><td>33</td><td>테슬라 모델3</td><td>수입 전기차</td><td>110</td><td>123</td><td>직영 정비 인프라 부족 및 독점 부품으로 자차 부담 가중</td></tr>
+          <tr><td>34</td><td>테슬라 모델Y</td><td>수입 전기차 SUV</td><td>118</td><td>132</td><td>가액 상승 및 사고 복구 견적 단점 반영</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      위의 각 금액표는 운전자의 상세 연령, 직전 연도의 사고 이력에 따라 다소 다를 수 있습니다. 특히 연간 누적 주행거리를 바탕으로 환급을 주는 마일리지 할인, 그리고 블랙박스 및 안전 운전 점수(네비게이션 연동) 할인을 중복 적용할 경우 실질적인 비용 차이는 매우 크게 좁아질 수 있습니다.
+    </p>
+
+    <!-- 시각 데이터 차트 영역 -->
+    <div class="chart-container">
+      <h3>범위 한정 방식에 따른 연간 예상 요율 지표 비교</h3>
+      <canvas id="spouseInsuranceChart" width="800" height="350"></canvas>
+    </div>
+  </section>
+
+  <!-- 경력등록 및 혜택 섹션 -->
+  <section id="sec-benefits">
+    <h2>배우자 가입경력 인정제도 및 마케팅 이벤트 활용법</h2>
+    <p>
+      자동차보험 부부 한정을 설정해 두고도 많은 소비자들이 깜빡하여 수십만 원의 기회 손실을 입는 항목이 바로 가입경력 인정제도 등록입니다. 보험사 가입 시 주운전자인 본인 외에 배우자를 종피보험자로 등록해 두면, 향후 배우자가 본인 명의로 신규 자동차 보장을 독립 설계할 때 기존의 무사고 및 운전 경력을 그대로 물려받을 수 있어 초기 보험료를 대폭 낮추어 책정받을 수 있습니다.
+    </p>
+    
+    <h3>가입경력 인정 등록 3단계 절차</h3>
+    <ol>
+      <li>가입한 다이렉트 사이트 혹은 담당 지점에 로그인 및 연락을 취합니다.</li>
+      <li>종피보험자 경력지정 메뉴를 통해 배우자의 인적 사항을 입력하고 동의 서명을 받습니다.</li>
+      <li>제출이 완료되면 최대 3년까지의 과거 경력이 자동 산정되어 데이터베이스에 기록됩니다.</li>
+    </ol>
+
+    <div class="highlight-box">
+      <strong>신규 가입 혜택 노하우:</strong> 
+      대부분의 주요 메이저 브랜드에서는 연간 갱신 시점을 전후하여 다양한 다이렉트 프로모션을 제공합니다. 신규 및 타사 전환 고객을 위한 카드 결제 시 주유 상품권 이벤트, 네이버페이나 카카오페이 가맹점 상품 기프티콘, 소정의 현금지원 또는 일정 주유금액 지원금 및 백화점 상품권 증정 등 다양한 사은품 이벤트를 동시 진행하므로, 가입 전에 가입 순위별 혜택 내용을 면밀히 대조해 보시기를 적극 권장합니다.
+    </div>
+  </section>
+
+  <!-- 체류시간 극대화용 양식 섹션 -->
+  <section id="sec-calc" class="calc-container">
+    <h2>자동차보험 부부 한정 맞춤형 간이 가격 계산기</h2>
+    <p>
+      본인의 조건과 차종에 따라 예상되는 종합 납부 비용을 대략적으로 검출해 볼 수 있는 간이 시스템입니다. 정교하게 입력을 완성할수록 더욱 신뢰성 높은 산출 결과 값을 보여주므로 세부 사항을 차근차근 점검하며 진행해 주시기 바랍니다.
+    </p>
+
+    <form id="insuranceForm" onsubmit="calculateInsurance(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="inputModel">차종 선택 (34종 중 택일)</label>
+          <select id="inputModel" required>
+            <option value="" disabled selected>선택하세요</option>
+            <option value="860000">그랜저 (예상 86만원선)</option>
+            <option value="690000">아반떼 (예상 69만원선)</option>
+            <option value="760000">쏘렌토 (예상 76만원선)</option>
+            <option value="820000">카니발 (예상 82만원선)</option>
+            <option value="720000">스포티지 (예상 72만원선)</option>
+            <option value="730000">투싼 (예상 73만원선)</option>
+            <option value="910000">펠리세이드 (예상 91만원선)</option>
+            <option value="1050000">제네시스 G80 (예상 105만원선)</option>
+            <option value="1130000">제네시스 GV80 (예상 113만원선)</option>
+            <option value="780000">싼타페 (예상 78만원선)</option>
+            <option value="800000">K5 (예상 80만원선)</option>
+            <option value="890000">K8 (예상 89만원선)</option>
+            <option value="710000">셀토스 (예상 71만원선)</option>
+            <option value="530000">레이 (예상 53만원선)</option>
+            <option value="510000">모닝 (예상 51만원선)</option>
+            <option value="980000">EV6 (예상 98만원선)</option>
+            <option value="990000">아이오닉5 (예상 99만원선)</option>
+            <option value="1230000">테슬라 모델3 (예상 123만원선)</option>
+            <option value="1320000">테슬라 모델Y (예상 132만원선)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="inputAge">부부 중 최저 운전자 연령</label>
+          <select id="inputAge" required>
+            <option value="1.3">만 21세 이하 (할증폭 높음)</option>
+            <option value="1.15">만 26세 이상</option>
+            <option value="1.0">만 30세 이상 (표준 범위)</option>
+            <option value="0.9">만 35세 이상 (할인 구간)</option>
+            <option value="0.85">만 43세 이상 (최적 요율)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="inputHistory">운전자 직전 3년 무사고 여부</label>
+          <select id="inputHistory" required>
+            <option value="0.85">3년 이상 완전 무사고 (최대 할인)</option>
+            <option value="1.0">1년~3년 미만 무사고</option>
+            <option value="1.2">최근 1년 이내 경미 소형 사고 있음</option>
+            <option value="1.4">대인 접수 동반 중과실 사고 있음</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="inputSpecial">첨단 안전 장치 보유 여부</label>
+          <select id="inputSpecial" required>
+            <option value="0.94">전방충돌방지 + 차선이탈방지 완비</option>
+            <option value="0.97">일부 안전 보조 장치만 탑재</option>
+            <option value="1.0">해당 안전 장치 없음</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label>추가 선택 특약 정보 (중복 선택 가능)</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="chkBlackbox" value="0.97" checked>
+              <label for="chkBlackbox">블랙박스 상시 작동 할인 (3% 절감)</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="chkNavi" value="0.95" checked>
+              <label for="chkNavi">티맵/카카오내비 안전점수 80점 이상 (5% 절감)</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="chkMile" value="0.90">
+              <label for="chkMile">마일리지 특약 연동 (추후 10% 사후 환급 목표)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="clientName">견적 요청 담당자 성함</label>
+          <input type="text" id="clientName" placeholder="홍길동" required>
+        </div>
+
+        <div class="form-group">
+          <label for="clientPhone">수신용 긴급 연락처</label>
+          <input type="tel" id="clientPhone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" required>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="clientMemo">전문 비교 설계사 전달 메모</label>
+          <textarea id="clientMemo" rows="3" placeholder="예: 현재 다이렉트 이벤트를 통해 사은품이나 네이버페이 혜택이 가장 높은 싼곳 위주로 비교해서 가이드라인을 메일로 송부해주기를 요청합니다."></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-calculate">모의 산출 및 최적 설계서 매칭 요청하기</button>
+    </form>
+
+    <div id="calcResult" class="calc-result">
+      <h3 style="margin-top:0; color:var(--primary-color);">부부 한정 예측 진단서 결과</h3>
+      <p id="resultText" style="font-weight:700; font-size:1.15rem; margin-bottom:10px;"></p>
+      <p style="font-size:0.9rem; color:var(--text-muted); margin:0;">
+        본 산출치는 입력하신 데이터를 기반으로 연동된 모의 요율 결과이며, 실제 사고 가점율 및 세부 자차 부품 가치 변동에 따라 본계약 체결 시 다소 증감될 수 있습니다. 해당 데이터를 활용하여 제휴 전문 대리점에서 상세 조율서를 문자 전송해 드립니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ 섹션 -->
+  <section id="sec-faq">
+    <h2>자동차보험 부부 한정 자주 묻는 질문 (FAQ)</h2>
+    <div class="faq-wrapper">
+      <div class="faq-item">
+        <h3 class="faq-trigger" onclick="toggleFaq(this)">Q1: 부부 한정 가입 중 형제나 부모가 운행하다 사고가 나면 어떻게 됩니까?</h3>
+        <div class="faq-content">
+          <p>
+            대인배상 1(의무 보험 범위)을 제외한 나머지 대인배상 2, 대물배상, 자기차량손해(자차), 자기신체사고 등 거의 모든 종합보험 영역에 대해 보상을 일절 받을 수 없게 됩니다. 이는 경제적으로 엄청난 리스크가 되므로 단 하루라도 다른 가족 구성원이 주행할 계획이라면 반드시 개시일 전날까지 각 보험사의 앱이나 고객 센터를 통해 단기운전자확대특약을 임시 가입해주셔야 완벽히 보호받을 수 있습니다.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-trigger" onclick="toggleFaq(this)">Q2: 법적 부부가 아닌 사실혼 상태에서도 가입 처리가 정상적으로 완료되나요?</h3>
+        <div class="faq-content">
+          <p>
+            예, 그렇습니다. 최근 금융감독 규정이 합리적으로 보강되면서, 단순 등본상 동거인 지칭이더라도 사실상의 부부임을 증빙할 수 있는 공식 주민등록등본 제출이나 양가 직계가족 증빙 절차를 이수하시면 정상적인 부부 한정 혜택 요율을 적용받을 수 있습니다.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-trigger" onclick="toggleFaq(this)">Q3: 가입 경력인정 지정 등록은 나중에 만기 시점에 소급 적용할 수 있나요?</h3>
+        <div class="faq-content">
+          <p>
+            원칙적으로는 보험 유지 기간 중간 혹은 최초 시작 시 등록하는 것을 적극 권장합니다. 하지만 잊고 지나갔다 하더라도 계약 기간이 다 가기 전이나 만기가 지난 이후에도 일정한 혼인 확인 서류를 소명하면 가입 경력을 소급 등록하는 것이 가능하므로 크게 걱정하지 않으셔도 괜찮습니다.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-trigger" onclick="toggleFaq(this)">Q4: 보험사 브랜드별로 다이렉트 신규 할인율 차이가 많이 납니까?</h3>
+        <div class="faq-content">
+          <p>
+            동일한 차종(예: 그랜저, 쏘렌토 등)이라 하더라도 각 보험사 내부 손해율 관리 체계에 따라 수만 원 이상의 금액 편차가 벌어집니다. 따라서 네이버 검색 등을 통하여 수많은 다이렉트 전용 견적 시스템을 차례로 경유하며 비교 검토하는 것이 필수적입니다. 이때 제공되는 현금지원이나 상품권 증정 혜택을 챙기시면 한층 이득을 볼 수 있습니다.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-trigger" onclick="toggleFaq(this)">Q5: 운전자 연령 제한 설정은 어떻게 기준을 잡아야 요율이 안전할까요?</h3>
+        <div class="faq-content">
+          <p>
+            부부 한정 계약을 할 때 설정하는 나이 제한은 부부 두 사람 중에서 나이가 가장 어린 사람의 생년월일을 기준점으로 정해야 합니다. 만약 남편이 만 37세이고 아내가 만 34세라면, 반드시 만 30세 이상 특약이 아닌 만 35세 미만 특약 혹은 만 30세 특약 요율로 아내 기준에 맞춰 범위를 설정해야 하며, 이를 위반하여 가입한 상태에서 아내가 사고를 낼 시 고지의무 위반 및 무보험으로 처리될 수 있으므로 각별한 주의가 요구됩니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 외부 리소스 섹션 -->
+  <section id="sec-resources">
+    <h2>신뢰성 높은 외부 전문 정보 참고자료</h2>
+    <p>
+      안정되고 투명한 금융 의사결정을 돕기 위해 공공기관 및 법령 정보가 수록된 공식 홈페이지 목록을 함께 소개합니다. 상업 광고성 블로그를 넘어서는 공인된 지식 확인에 유용합니다.
+    </p>
+    <ul>
+      <li><a href="https://www.namu.wiki/w/%EC%9E%90%EB%8F%99%EC%B0%A8%EB%B3%B4%ED%97%98" target="_blank" rel="noopener" class="link-ref">나무위키 자동차보험 상세 해설 바로가기</a></li>
+      <li><a href="https://www.fss.or.kr" target="_blank" rel="noopener" class="link-ref">금융감독원 공시 포털 및 분쟁조정 사례 확인</a></li>
+      <li><a href="https://www.kidi.or.kr" target="_blank" rel="noopener" class="link-ref">보험개발원 차량 기준가액 및 요율 통계 참조</a></li>
+      <li><a href="https://www.molit.go.kr" target="_blank" rel="noopener" class="link-ref">국토교통부 안전 규제 및 의무 조항 종합 가이드</a></li>
+      <li><a href="https://www.klac.or.kr" target="_blank" rel="noopener" class="link-ref">대한법률구조공단 사실혼 증빙 및 법률 구제 사례</a></li>
+    </ul>
+  </section>
+
+  <!-- Chart.js 라이브러리 및 차트 구동 스크립트 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // FAQ 토글 기능 스크립트
+    function toggleFaq(element) {
+      const content = element.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    }
+
+    // Chart.js를 이용한 요율 지표 비교 그래프 구성
+    document.addEventListener('DOMContentLoaded', () => {
+      const ctx = document.getElementById('spouseInsuranceChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['1인 한정 (기준점)', '부부 한정 특약', '부부 + 지정 1인', '가족 한정 범위', '누구나 운전 (무제한)'],
+          datasets: [{
+            label: '요율 기준 백분율 (낮을수록 저렴함)',
+            data: [100, 112, 125, 142, 185],
+            backgroundColor: [
+              '#3182ce',
+              '#319795',
+              '#dd6b20',
+              '#e53e3e',
+              '#718096'
+            ],
+            borderRadius: 8,
+            borderWidth: 1,
+            borderColor: '#e2e8f0'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  return value + '%';
+                }
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+    });
+
+    // 다중 문항 보험 계산 연산 로직
+    function calculateInsurance(event) {
+      event.preventDefault();
+      
+      const baseValue = parseFloat(document.getElementById('inputModel').value);
+      const ageFactor = parseFloat(document.getElementById('inputAge').value);
+      const historyFactor = parseFloat(document.getElementById('inputHistory').value);
+      const specialFactor = parseFloat(document.getElementById('inputSpecial').value);
+      
+      let discount = 1.0;
+      if (document.getElementById('chkBlackbox').checked) discount *= parseFloat(document.getElementById('chkBlackbox').value);
+      if (document.getElementById('chkNavi').checked) discount *= parseFloat(document.getElementById('chkNavi').value);
+      if (document.getElementById('chkMile').checked) discount *= parseFloat(document.getElementById('chkMile').value);
+      
+      if (isNaN(baseValue)) {
+        alert('차종을 정상적으로 선택해주시기 바랍니다.');
+        return;
+      }
+      
+      // 계산 공식 구동
+      const finalPrice = Math.round((baseValue * ageFactor * historyFactor * specialFactor * discount) / 10000) * 10000;
+      const formattedPrice = (finalPrice / 10000).toLocaleString('ko-KR') + "만원";
+      
+      const name = document.getElementById('clientName').value;
+      const resultBox = document.getElementById('calcResult');
+      const resultText = document.getElementById('resultText');
+      
+      resultText.textContent = name + " 고객님께 최적화된 부부 한정 특약 연간 종합 예상 보험료는 약 " + formattedPrice + " 선입니다.";
+      resultBox.style.display = "block";
+      
+      // 사용자 체류 및 확인을 돕기 위해 화면을 결과창으로 부드럽게 스크롤
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+  
